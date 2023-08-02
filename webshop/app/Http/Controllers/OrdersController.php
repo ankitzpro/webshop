@@ -14,11 +14,13 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class OrdersController extends Controller
 {
+    //fetch all orders
     public function index()
     {
         return Orders::all();
     }
 
+    //add order
     public function store(Request $request)
     {
 
@@ -65,6 +67,7 @@ class OrdersController extends Controller
         
     }
 
+    //fetch sinle order
     public function show($id)
     {
             $order =Orders::with('customer','products')->select('id','customer_id','amount')->where('id',$id)->first();
@@ -74,6 +77,7 @@ class OrdersController extends Controller
             return response()->json(['order' => $order], 200);
     }
 
+    //delete order
     public function destroy($id)
     {
         $order = Orders::find($id);
@@ -86,6 +90,7 @@ class OrdersController extends Controller
         }
     }
 
+    // add product
     public function attachProduct(Request $request,$id){
 
         $this->validate($request, [
@@ -125,6 +130,7 @@ class OrdersController extends Controller
 
     }
 
+    //Pay for the order
     public function payOrder($id){
 
         try{
@@ -163,6 +169,7 @@ class OrdersController extends Controller
           }
     }
 
+    //Curl request
     public function callCurl($url,$data) {
 
         $headers = [
