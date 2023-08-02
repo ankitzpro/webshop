@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('orders', 'App\Http\Controllers\OrdersController');
+Route::post('orders/{id}/add', 'App\Http\Controllers\OrdersController@attachProduct');
+Route::post('orders/{id}/pay', 'App\Http\Controllers\OrdersController@payOrder');
